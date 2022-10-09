@@ -13,10 +13,10 @@ export class PostComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.post = this.samplePost() 
+    this.post = PostComponent.samplePost()
   }
 
-  samplePost():Post{
+  static samplePost():Post{
     return {
       user: {
         nickname: "ciao",

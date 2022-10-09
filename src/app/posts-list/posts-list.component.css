@@ -1,0 +1,7 @@
+.postsList{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    min-height: fit-content;
+    gap: 4rem;
+}
