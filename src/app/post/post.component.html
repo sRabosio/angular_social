@@ -1,1 +1,13 @@
-<p>post works!</p>
+<div class="post">
+    <div class="postHeader">
+        <div class="postHeader__user">
+            <img src="" alt="" class="postHeader__user__image">
+            <p class="postHeader__user__name">
+                user/{{post!.user.nickname}}
+            </p>
+        </div>
+    </div>
+    <p class="postContent">
+        {{post!.text}}
+    </p>
+</div>
