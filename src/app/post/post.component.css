@@ -2,11 +2,13 @@
     background-color: white;
     border: 1px solid black;
     display: grid;
-    grid-template-rows: 100%, auto, 100px;
+    grid-template-rows: 100px auto 100px;
     width: 80%;
+    place-self: center;
     height: fit-content;
     gap: 1rem;
     border-radius: 1rem;
+    margin: 0;
 }
 
 .postContent{

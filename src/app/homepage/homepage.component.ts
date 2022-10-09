@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/data-types/post';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-homepage',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
+  posts?:Post[]
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
+    this.posts = [
+      PostComponent.samplePost(),
+      PostComponent.samplePost(),
+      PostComponent.samplePost(),
+      PostComponent.samplePost(),
+      PostComponent.samplePost(),
+      PostComponent.samplePost()
+    ]
   }
-
 }

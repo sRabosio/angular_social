@@ -1,1 +1,9 @@
-<p>homepage works!</p>
+<div class="homepage">
+    <div class="header"><h1>TESTATA</h1></div>
+    <div class="homepage__content">
+        <app-sidebar class="sidebar"></app-sidebar>
+        <div class="postsList">
+            <app-post *ngFor="let p of posts"></app-post>
+        </div>
+    </div>
+</div>

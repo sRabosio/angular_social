@@ -1,18 +1,22 @@
 .sidebar{
+    position: relative;
     display: flex;
-    direction: column;
+    flex-direction: column;
     gap: 2rem;
     margin: 0;
-    border-right: 2px solid black;
+    padding-top: 2rem;    
+    min-width: 100%;
+    
 }
 
 .sidebar__button{
+    position: relative;
     background-color: lightblue;
     margin: 0;
     padding: 0.5rem;
     color: black;
     border: none;
-    min-width: 30%;
+    max-width: 30%;
     text-align: end;
     border-radius: 0 0.5rem 0.5rem 0;
 }
