@@ -1,13 +1,14 @@
-<div class="post">
-    <div class="postHeader">
-        <div class="postHeader__user">
-            <img src="" alt="" class="postHeader__user__image">
-            <p class="postHeader__user__name">
-                user/{{post!.user.nickname}}
-            </p>
+<div class="card">
+    <div class="card-body">
+        <div class="postHeader">
+            <div class="postHeader__user">
+                <p class="postHeader__user__name">
+                    user/{{post!.user.nickname}}
+                </p>
+            </div>
         </div>
+        <p class="card-text">
+            {{post!.text}}
+        </p>
     </div>
-    <p class="postContent">
-        {{post!.text}}
-    </p>
 </div>

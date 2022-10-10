@@ -1,22 +1,12 @@
-.post{
-    background-color: white;
-    border: 1px solid black;
-    display: grid;
-    grid-template-rows: 100px auto 100px;
-    width: 80%;
-    place-self: center;
-    height: fit-content;
-    gap: 1rem;
-    border-radius: 1rem;
-    margin: 0;
+.card{
+    min-width: 100%;
 }
 
-.postContent{
-    color: black;
+.card-text{
     grid-row: 2;
-    word-wrap: normal;
     min-height: 6rem;
     margin-left: 2rem;
+    margin-top: 1rem;
 }
 
 .postHeader{
@@ -24,6 +14,8 @@
     flex-direction: row;
     margin-left: 1rem;
     margin-right: 1rem;
+    padding: 0;
+    margin: 0;
     grid-row: 1;    
     border-bottom: 1px solid black;
 }
@@ -31,6 +23,11 @@
 .postHeader__user{
     display: flex;
     flex-direction: column;
+}
+
+.postHeader__user__name{
+    margin: 0;
+    font-size: 10px;
 }
 
 .postHeader__user__image{
