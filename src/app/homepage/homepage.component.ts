@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/data-types/post';
+import { User } from 'src/data-types/user';
 import { PostComponent } from '../post/post.component';
 
 @Component({
@@ -10,6 +11,7 @@ import { PostComponent } from '../post/post.component';
 export class HomepageComponent implements OnInit {
 
   posts?:Post[]
+  user?:User
 
   constructor() { }
 

@@ -1,0 +1,11 @@
+.container{
+  background-color: rgba(128, 128, 128, 0.2);
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+}
+
+
