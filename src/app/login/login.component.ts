@@ -8,11 +8,7 @@ import { User } from 'src/data-types/user';
 })
 export class LoginComponent implements OnInit {
 
-  testUser:User = {
-    nickname: "amogus",
-    email: "amogus@gmail.com",
-    password: "amogus",
-  }
+  
 
   protected formEmail: string = ""
   protected formPassword:string = ""
@@ -31,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(email:HTMLInputElement, password:HTMLInputElement){
-    console.log(`${email.value} ${password.value}`);
+    
   }
 
 }

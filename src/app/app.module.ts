@@ -13,6 +13,7 @@ import { PostsListComponent } from './posts-list/posts-list.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { PopupComponent } from './popup/popup.component';
+import { FilterArrayPipe } from './filter-array.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PopupComponent } from './popup/popup.component';
     PostsListComponent,
     RegistrationComponent,
     LoginComponent,
-    PopupComponent
+    PopupComponent,
+    FilterArrayPipe
   ],
   imports: [
     BrowserModule,
