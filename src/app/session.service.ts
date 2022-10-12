@@ -14,8 +14,10 @@ export class SessionService {
     const i = setInterval(()=>{
       console.log("observable", this.user);
       if(!this.user) return
+
       const authRes = this.userService.validate(this.user)
       if(!authRes) return
+      
       obs.next(authRes)
       clearInterval(i)
       obs.unsubscribe()

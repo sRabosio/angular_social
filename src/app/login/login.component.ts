@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { User } from 'src/data-types/user';
 import { UserService } from '../services/user.service';
 import { SessionService } from '../session.service';
@@ -14,6 +15,10 @@ export class LoginComponent implements OnInit {
   protected formEmail: string = ""
   protected formPassword:string = ""
 
+  get formEmpty(){
+    return this.formEmail === "" || this.formPassword === ""
+  }
+
   constructor(private userService:UserService, private session:SessionService) { }
 
   ngOnInit(): void {
@@ -27,14 +32,13 @@ export class LoginComponent implements OnInit {
     if(at >= 0 && value.indexOf(".") > at) return
   }
 
-  onLogin(email:HTMLInputElement, password:HTMLInputElement){
+  onLogin(form:NgForm){
     const userLog = {
       nickname:"",
-      email:email.value,
-      password:password.value
+      email:"",
+      password:""
     }
     
     this.session.user = userLog
   }
-
 }

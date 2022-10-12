@@ -1,21 +1,20 @@
 <div class="card bg-light">
   <div class="card-header">Login</div>
   <div class="card-body">
-      <div class="form-group">
+      <form class="form-group"  #f >
         <div>
           <label for="email">email</label><br>
-          <input type="email" name="email" id="" class="from-control" #email
-          [value]="formEmail" (input)="onEvent($event)">
+          <input type="email" name="email" id="email" [(ngModel)]="formEmail" class="from-control" #email>
 
         </div>
         <div>
-          <label for="password">password</label><br>
-          <input type="password" name="password" id="" class="from-control" #password>
+          <label for="password">password</label><br>  
+          <input type="password" name="password" id="password" [(ngModel)]="formPassword" class="from-control" #password>
         </div>
         <div class="container buttons-container">
-          <button class="btn btn-primary">Register</button>
-          <button class="btn btn-primary" (click)="onLogin(email, password)">Login</button>
+          <button class="btn btn-primary" >Register</button>
+          <button class="btn btn-primary" [disabled]="formEmpty">Login</button>
         </div>
-      </div>
+      </form>
   </div>
 </div>
