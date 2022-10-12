@@ -8,6 +8,5 @@ export type User = {
     password:string,
     followed?:User[],
     likedPosts?:Post[],
-    comments?:Comment[],
     likedComments?:Comment[]
 }

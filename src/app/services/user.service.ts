@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/data-types/user';
+import { FilterArrayPipe } from '../filter-array.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,11 @@ import { User } from 'src/data-types/user';
 export class UserService {
 
   private _users:User[] = []
+  
+  private getUser(email:string){
+    return this._users.filter(e => e.email === email)[0]
+  }
+
 
   constructor() {
     this._users.push({
@@ -16,15 +22,24 @@ export class UserService {
     })
   }
 
+  //returns operation success (true/false)
   add(u:User){
-    if(this._users.filter(e => e.email === u.email)) return new Error("l'utente già esiste")
+    if(this.getUser(u.email)) return false
     this._users.push(u)
+    return true
   }
 
-  getUserByMail(email:string){
-    const result = this._users.filter(e => e.email === email)
-    result.forEach(e => e.password = "")
-    
-    return [...result]
+  findUser(value: string){
+    let result:User[] = []
+    result = [...result, ...this._users.filter(e => e.email.search(value))]
+    result = [...result, ...this._users.filter(e => e.nickname.search(value))]
+    return result
+  }
+
+  //conferma che mail e password coincidano con un account presente nel db
+  validate(u:User){
+    const result = this.getUser(u.email)
+    if(result.password === u.password) return {...result}
+    return
   }
 }
