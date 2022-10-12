@@ -1,19 +1,19 @@
 <div class="card bg-light">
   <div class="card-header">Login</div>
   <div class="card-body">
-      <form class="form-group"  #f >
-        <div>
-          <label for="email">email</label><br>
-          <input type="email" name="email" id="email" [(ngModel)]="formEmail" class="from-control" #email>
-
+      <form class="form-group" (ngSubmit)="onLogin(f)" #f="ngForm" >
+        <div class="input-box">
+          <label for="email">email</label>
+          <input type="email" name="email" id="email" [(ngModel)]="formEmail" email class="from-control" required #email="ngModel">
+          <span class="form-validation-message" *ngIf="!email.valid && email.touched">devi inserire un'email valida</span>
         </div>
-        <div>
-          <label for="password">password</label><br>  
-          <input type="password" name="password" id="password" [(ngModel)]="formPassword" class="from-control" #password>
+        <div class="input-box">
+          <label for="password">password</label>  
+          <input type="password" name="password" id="password" [(ngModel)]="formPassword" class="from-control" required #password>
         </div>
         <div class="container buttons-container">
-          <button class="btn btn-primary" >Register</button>
-          <button class="btn btn-primary" [disabled]="formEmpty">Login</button>
+          <button class="btn btn-primary">Register</button>
+          <button type="submit" class="btn btn-primary" [disabled]="formEmpty">Login</button>
         </div>
       </form>
   </div>

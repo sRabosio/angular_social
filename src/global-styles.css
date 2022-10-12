@@ -1,0 +1,22 @@
+.form-validation-message{
+    color: red;
+    font-size: 9px;
+}
+
+input.ng-invalid.ng-touched{
+    border-color: red;
+    border-radius: 3px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-box{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 15rem;
+}

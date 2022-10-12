@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
 import { User } from 'src/data-types/user';
 import { UserService } from '../services/user.service';
 import { SessionService } from '../session.service';
@@ -9,21 +9,29 @@ import { SessionService } from '../session.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, DoCheck {
 
+  @ViewChild("f") loginForm?:NgForm
   
   protected formEmail: string = ""
   protected formPassword:string = ""
 
   get formEmpty(){
-    return this.formEmail === "" || this.formPassword === ""
+    return this.loginForm?.status === "INVALID"
   }
 
-  constructor(private userService:UserService, private session:SessionService) { }
+  constructor(private userService:UserService, private session:SessionService) {
+    
+   }
+  
+  ngDoCheck(): void {
+      
+  }
 
   ngOnInit(): void {
   }
 
+  //da eliminare???
   onEvent(e:Event){
     const input = e.target as HTMLInputElement
     if(input.name !== "email") return
@@ -33,10 +41,11 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form:NgForm){
+    //TODO: tira fuori dal form i parametri
     const userLog = {
       nickname:"",
-      email:"",
-      password:""
+      email:this.formEmail,
+      password:this.formPassword
     }
     
     this.session.user = userLog
