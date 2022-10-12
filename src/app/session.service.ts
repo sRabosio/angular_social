@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable } from 'rxjs';
+import { observeNotification } from 'rxjs/internal/Notification';
 import { User } from 'src/data-types/user';
 import { UserService } from './services/user.service';
 
@@ -10,14 +11,15 @@ export class SessionService {
 
   user?:User
   promise = new Observable<User>(obs=>{
-    setInterval(()=>{
+    const i = setInterval(()=>{
       console.log("observable", this.user);
       if(!this.user) return
       const authRes = this.userService.validate(this.user)
       if(!authRes) return
       obs.next(authRes)
-      obs.complete
-    }, 500)
+      clearInterval(i)
+      obs.unsubscribe()
+    }, 1000)
   })
 
   constructor(private userService:UserService) { }
