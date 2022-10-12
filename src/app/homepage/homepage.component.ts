@@ -14,14 +14,21 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   posts?:Post[]
   user?:User
-  userSub = this.session.promise.subscribe({
-    next: val=>this.user = val
-  })  
+  
+  fetchUser = new Promise(()=>{
+    let sessionUser: User | undefined
+    const i = setInterval(()=>{
+      sessionUser = this.session.user
+      if(sessionUser){
+        this.user = sessionUser
+        clearInterval(i)
+      } 
+    },1000)
+  })
 
 
   constructor(private session:SessionService) { }
   ngOnDestroy(): void {
-    this.userSub.unsubscribe
   }
 
   ngOnInit(): void{

@@ -41,13 +41,14 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   onLogin(form:NgForm){
-    //TODO: tira fuori dal form i parametri
     const userLog = {
       nickname:"",
       email:this.formEmail,
       password:this.formPassword
     }
+    const result = this.userService.validate(userLog)
+    if(!result) return
     
-    this.session.user = userLog
+    this.session.user = result
   }
 }

@@ -10,19 +10,6 @@ import { UserService } from './services/user.service';
 export class SessionService {
 
   user?:User
-  promise = new Observable<User>(obs=>{
-    const i = setInterval(()=>{
-      console.log("observable", this.user);
-      if(!this.user) return
-
-      const authRes = this.userService.validate(this.user)
-      if(!authRes) return
-      
-      obs.next(authRes)
-      clearInterval(i)
-      obs.unsubscribe()
-    }, 1000)
-  })
 
   constructor(private userService:UserService) { }
 }

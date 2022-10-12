@@ -39,6 +39,7 @@ export class UserService {
   //conferma che mail e password coincidano con un account presente nel db
   validate(u:User){
     const result = this.getUser(u.email)
+    if(!result) return
     if(result.password === u.password) return {...result}
     return
   }
