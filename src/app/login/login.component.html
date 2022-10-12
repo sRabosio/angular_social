@@ -1,7 +1,9 @@
 <div class="card bg-light">
   <div class="card-header">Login</div>
   <div class="card-body">
-      <form class="form-group" (ngSubmit)="onLogin(f)" #f="ngForm" >
+
+      <!-- login form -->
+      <form *ngIf="!registration" class="form-group" (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
         <div class="input-box">
           <label for="email">email</label>
           <input type="email" name="email" id="email" [(ngModel)]="formEmail" email class="from-control" required #email="ngModel">
@@ -11,9 +13,35 @@
           <label for="password">password</label>  
           <input type="password" name="password" id="password" [(ngModel)]="formPassword" class="from-control" required #password>
         </div>
-        <div class="container buttons-container">
-          <button class="btn btn-primary">Register</button>
+        <div class="container buttons-container">     
           <button type="submit" class="btn btn-primary" [disabled]="formEmpty">Login</button>
+          <span class="form-tooltip">if you don't have an account you should <a href="#" (click)="registration = !registration">register</a></span>
+        </div>
+      </form>
+
+      <!-- registration form -->
+      <form *ngIf="registration" class="form-group" (ngSubmit)="onLogin(registrationForm)" #registrationForm="ngForm" >
+        <div class="input-box">
+          <label for="nickname">nickname</label>
+          <input type="formNickname" name="formNickname" id="formNickname" [(ngModel)]="formNickname" class="from-control" required #regNickname="ngModel">
+          <!--span class="form-validation-message" *ngIf="!email.valid && email.touched">devi inserire un'email valida</span-->
+        </div>
+        <div class="input-box">
+          <label for="email">email</label>
+          <input type="email" name="email" id="email" [(ngModel)]="formEmail" email class="from-control" required #regEmail="ngModel">
+          <span class="form-validation-message" *ngIf="!regEmail.valid && regEmail.touched">devi inserire un'email valida</span>
+        </div>
+        <div class="input-box">
+          <label for="password">password</label>  
+          <input type="password" name="password" id="password" [(ngModel)]="formPassword" class="from-control" required #RegPassword>
+        </div>
+        <div class="input-box">
+          <label for="passwordConf">confirm password</label>  
+          <input type="password" name="passwordConf" id="passwordConf" [(ngModel)]="formPasswordConf" class="from-control" required #passwordConf>
+        </div>
+        <div class="container buttons-container">          
+          <button type="submit" class="btn btn-primary" [disabled]="formEmpty">Register</button>
+          <span class="form-tooltip">if you already have an account you should  <a href="#" (click)="registration = !registration">log-in</a></span>
         </div>
       </form>
   </div>

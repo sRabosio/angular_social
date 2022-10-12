@@ -1,11 +1,8 @@
 .buttons-container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
-  gap: 2rem;
 }
-
-
 
 .btn:hover{
   background-color: white;

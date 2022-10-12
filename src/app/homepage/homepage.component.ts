@@ -14,6 +14,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   posts?:Post[]
   user?:User
+
+  set registration(b:boolean){
+    this.registration = b
+  }
+
   
   fetchUser = new Promise(()=>{
     let sessionUser: User | undefined
@@ -25,7 +30,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
       } 
     },1000)
   })
-
 
   constructor(private session:SessionService) { }
   ngOnDestroy(): void {

@@ -15,6 +15,9 @@ export class LoginComponent implements OnInit, DoCheck {
   
   protected formEmail: string = ""
   protected formPassword:string = ""
+  protected formPasswordConf:string = ""
+  protected formNickname:string = ""
+  registration = false
 
   get formEmpty(){
     return this.loginForm?.status === "INVALID"
