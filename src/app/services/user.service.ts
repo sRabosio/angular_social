@@ -8,6 +8,10 @@ import { FilterArrayPipe } from '../filter-array.pipe';
 export class UserService {
 
   private _users:User[] = []
+
+  get users(){
+    return [...this._users]
+  }
   
   private getUser(email:string){
     return this._users.filter(e => e.email === email)[0]

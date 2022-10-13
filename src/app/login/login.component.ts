@@ -39,11 +39,28 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   onRegistration(form: NgForm) {
+    const users = this.userService.users
     const userReg = {
       nickname: this.formNickname,
       email: this.formEmail,
       password: this.formPassword
+    }    
+    
+    if(users.filter(u=>u.nickname === userReg.nickname).length>0){
+      alert("il nickname è già in uso")
+      return
     }
+    if(users.filter(u=>u.email === userReg.email).length>0){
+      alert("esiste già un account con questa email")
+      return
+    }
+    if(userReg.password !== this.formPasswordConf){
+      alert("le password devono coincidere")
+      return
+    }
+
+    this.userService.add(userReg)
+    this.registration = !this.registration
   }
 
 
@@ -54,12 +71,12 @@ export class LoginComponent implements OnInit, DoCheck {
       password:this.formPassword
     }
     const result = this.userService.validate(userLog)
-    if(!result) return
+    if(!result){
+      alert("email o password sbagliate")
+      return
+    }
     
     this.session.user = result
   }
 
-  onRegister(form:NgForm){
-
-  }
 }
