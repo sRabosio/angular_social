@@ -1,5 +1,5 @@
 import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, NgModel, Validators } from '@angular/forms';
 import { User } from 'src/data-types/user';
 import { UserService } from '../services/user.service';
 import { SessionService } from '../session.service';
@@ -11,37 +11,41 @@ import { SessionService } from '../session.service';
 })
 export class LoginComponent implements OnInit, DoCheck {
 
-  @ViewChild("f") loginForm?:NgForm
-  
+  @ViewChild("loginForm") loginForm?:NgForm
+  @ViewChild("registrationForm") registrationForm?:NgForm
   protected formEmail: string = ""
   protected formPassword:string = ""
   protected formPasswordConf:string = ""
   protected formNickname:string = ""
   registration = false
 
-  get formEmpty(){
+  get formLogEmpty(){
     return this.loginForm?.status === "INVALID"
   }
 
+  get formRegEmpty(){
+    return this.registrationForm?.status === "INVALID"
+  }
+
   constructor(private userService:UserService, private session:SessionService) {
-    
-   }
+  }
   
   ngDoCheck(): void {
-      
+    
   }
 
   ngOnInit(): void {
+    
   }
 
-  //da eliminare???
-  onEvent(e:Event){
-    const input = e.target as HTMLInputElement
-    if(input.name !== "email") return
-    const value = input.value
-    const at = value.indexOf("@")
-    if(at >= 0 && value.indexOf(".") > at) return
+  onRegistration(form: NgForm) {
+    const userReg = {
+      nickname: this.formNickname,
+      email: this.formEmail,
+      password: this.formPassword
+    }
   }
+
 
   onLogin(form:NgForm){
     const userLog = {
@@ -53,5 +57,9 @@ export class LoginComponent implements OnInit, DoCheck {
     if(!result) return
     
     this.session.user = result
+  }
+
+  onRegister(form:NgForm){
+
   }
 }
