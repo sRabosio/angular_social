@@ -12,11 +12,14 @@ export class UserService {
   get users(){
     return [...this._users]
   }
-  
-  private getUser(email:string){
-    return this._users.filter(e => e.email === email)[0]
+   
+  public getUserByName(nickname:string){
+    return this._users.filter(e => e.nickname === nickname)[0]
   }
 
+  getUserByEmail(email:string){
+    return this._users.filter(e=>e.email === email)[0]
+  }
 
   constructor() {
     this._users.push({
@@ -26,17 +29,25 @@ export class UserService {
       following: ["ciao"],
       likedComments: [],
       likedPosts: []
-    })
+    },
+    {
+      nickname: "ciao",
+      email: "ciao",
+      password: "ciao",
+      following: [],
+      likedComments: [],
+      likedPosts: []
+    },)
   }
 
   //returns operation success (true/false)
   add(u:User){
-    if(this.getUser(u.email)) return false
+    if(this.getUserByEmail(u.email) || this.getUserByName(u.nickname)) return false
     this._users.push(u)
     return true
   }
 
-  findUser(value: string){
+  findUsers(value: string){
     let result:User[] = []
     result = [...result, ...this._users.filter(e => e.email.search(value))]
     result = [...result, ...this._users.filter(e => e.nickname.search(value))]
@@ -45,7 +56,7 @@ export class UserService {
 
   //conferma che mail e password coincidano con un account presente nel db
   validate(u:User){
-    const result = this.getUser(u.email)
+    const result = this.getUserByEmail(u.email)
     if(!result) return
     if(result.password === u.password) return {...result}
     return

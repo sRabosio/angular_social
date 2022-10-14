@@ -10,10 +10,13 @@ export class PostService {
   private _posts:Post[] = []
   get posts(){
     this._posts.sort((p1, p2)=> (p1.date.getTime() - p2.date.getTime())*-1)
-    console.log(this._posts);  
     return [...this._posts]
   }
   emitter = new Subject<Post[]>()
+
+  getPostByUser(nickname:string){
+    return this.posts.filter(p=>p.user === nickname)
+  }
 
   constructor() {
       this._posts = [
@@ -34,14 +37,7 @@ export class PostService {
 
   samplePost():Post{
     return {
-      user: {
-        nickname: "ciao",
-        email: "ciao",
-        password: "ciao",
-        following: [],
-        likedComments: [],
-        likedPosts: []
-      },
+      user: "ciao",
       title: "amg",
       text: "Il pollo è il miglior cibo senza ombra di dubbio",
       date: new Date()

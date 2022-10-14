@@ -1,9 +1,0 @@
-.postsList{
-    display: flex;
-    flex-direction: column;
-    
-    gap: 4rem;
-    margin: 0;  
-    min-height: max-content;
-    padding-bottom: 10rem;
-}

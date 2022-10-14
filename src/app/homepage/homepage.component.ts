@@ -35,7 +35,7 @@ export class HomepageComponent implements OnInit, OnDestroy{
   })
 
   extractUserFeed(list:Post[]){
-    return list.filter(p=>this.user?.following.includes(p.user.nickname) || p.user === this.user)
+    return list.filter(p=>this.user?.following.includes(p.user) || p.user === this.user?.nickname)
   }
 
   constructor(private session:SessionService, private postService:PostService) {

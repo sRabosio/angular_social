@@ -1,0 +1,7 @@
+<div class="container profile-header">
+    <h2>{{user.nickname}}</h2>
+    <div class="profile-info"></div>
+</div>
+<div class="postsList">
+    <app-post *ngFor="let p of posts" [post]="p"></app-post>
+</div>
