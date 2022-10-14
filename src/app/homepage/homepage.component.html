@@ -1,13 +1,7 @@
-<app-popup *ngIf="!user">amognun</app-popup>
-<div class="homepage">
-    <div class="header"><h1>TESTATA</h1></div>
-    <div class="homepage__content">
-        <app-sidebar class="sidebar"></app-sidebar>
         <div class="postsList container">
             <app-new-post></app-new-post>
             <app-post *ngFor="let p of posts" [post]="p"></app-post>
         </div>
-    </div>
-</div>
+
 
 
