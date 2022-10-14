@@ -2,9 +2,9 @@
     <div class="card-body">
         <div class="postHeader">
             <div class="postHeader__user">
-                <p class="postHeader__user__name">
-                    user/{{post!.user}}
-                </p>
+                <a class="postHeader__user__name" [routerLink]="['user', post!.user]">
+                    {{post!.user}}
+                </a>
             </div>
         </div>
         <p class="card-text">

@@ -1,9 +1,10 @@
 <div class="container ">
-    <button class="btn btn-outline-dark">profile</button>
+    <button class="btn btn-outline-dark" [routerLink]="['/user', user?.nickname]">profile</button>
     <button class="btn btn-outline-dark">
         followers
     </button>
     <button class="btn btn-outline-dark">
         followed
     </button>
+    <button (click)="killUser()">kill user</button>
 </div>

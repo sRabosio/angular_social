@@ -28,17 +28,17 @@ export class NewPostComponent implements OnInit, DoCheck {
   }
 
   onPost(){
-    if(!this.session.user){
+    const user = this.session.user
+    if(!user){
       alert("l'utente non esiste!")
       return
     }
     const post:Post = {
-      user: this.session.user.nickname,
+      user: user.nickname!,
       title: this.form.get('postTitle')!.value,
       text: this.form.get('postContent')!.value,
       date:new Date()
     }
-    console.log(post);
     
     this.postService.addPost(post)
     this.form.reset()

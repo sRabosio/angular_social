@@ -19,16 +19,18 @@ export class ProfileComponent implements OnInit {
   posts:Post[] = []
 
   constructor(private route:ActivatedRoute, private userService:UserService, private postService:PostService, private router:Router) { 
+    
     this.user = userService.getUserByName(
       route.snapshot.params["nickname"]
     )
     if(!this.user) router.navigateByUrl("")
-    console.log(this.user);
     
     this.posts = postService.getPostByUser(this.user.nickname)
+    router.routeReuseStrategy.shouldReuseRoute = ()=>false
   }
 
   ngOnInit(): void {
+    
     this.postsSub = this.postService.emitter.subscribe(next=>{
       this.posts = next.filter(p=>p.user === this.user.nickname)
     })

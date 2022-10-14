@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { User } from 'src/data-types/user';
 import { SessionService } from './session.service';
 
@@ -7,22 +8,20 @@ import { SessionService } from './session.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'angular_social';
   user?:User
-
-  fetchUser = new Promise(()=>{
-    let sessionUser: User | undefined
-    const i = setInterval(()=>{
-      sessionUser = this.session.user
-      if(sessionUser){
-        this.user = sessionUser
-        clearInterval(i)
-      } 
-    },1000)
-  })
+  userSub?:Subscription
 
   constructor(private session:SessionService){
-
+    this.userSub = this.session.emitter.subscribe(next=>this.user = next)
   }
+  ngOnInit(): void {
+    
+  }
+  ngOnDestroy(): void {
+    this.userSub?.unsubscribe()
+  }
+
+
 }

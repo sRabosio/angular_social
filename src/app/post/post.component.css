@@ -28,6 +28,8 @@
 .postHeader__user__name{
     margin: 0;
     font-size: 10px;
+    color: black;
+    font-weight: bold;
 }
 
 .postHeader__user__image{

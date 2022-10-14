@@ -15,24 +15,12 @@ export class HomepageComponent implements OnInit, OnDestroy{
 
   posts:Post[] = []
   user?:User
+  userSub?:Subscription
   feedSub?:Subscription
 
   set registration(b:boolean){
     this.registration = b
   }
-
-  
-  fetchUser = new Promise(()=>{
-    let sessionUser: User | undefined
-    const i = setInterval(()=>{
-      sessionUser = this.session.user
-      if(sessionUser){
-        this.user = sessionUser
-        this.posts = this.extractUserFeed(this.postService.posts)
-        clearInterval(i)
-      } 
-    },1000)
-  })
 
   extractUserFeed(list:Post[]){
     return list.filter(p=>this.user?.following.includes(p.user) || p.user === this.user?.nickname)
@@ -43,13 +31,13 @@ export class HomepageComponent implements OnInit, OnDestroy{
    }
 
   ngOnDestroy(): void {
-    this.feedSub!.unsubscribe()
+    this.userSub?.unsubscribe()
   }
 
   ngOnInit(): void{
-    
-    this.feedSub = this.postService.emitter.subscribe(next=>{
-      this.posts = this.extractUserFeed(next)
+    this.userSub = this.session.emitter.subscribe(next=>{
+      this.user = next
+      this.posts = this.extractUserFeed(this.postService.posts)   
     })
   }
 }
