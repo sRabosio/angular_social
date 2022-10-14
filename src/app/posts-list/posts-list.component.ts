@@ -14,14 +14,6 @@ export class PostsListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.posts = [
-      PostComponent.samplePost(),
-      PostComponent.samplePost(),
-      PostComponent.samplePost(),
-      PostComponent.samplePost(),
-      PostComponent.samplePost(),
-      PostComponent.samplePost()
-    ]
   }
 
 }
