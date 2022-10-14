@@ -9,6 +9,8 @@ export class PostService {
 
   private _posts:Post[] = []
   get posts(){
+    this._posts.sort((p1, p2)=> (p1.date.getTime() - p2.date.getTime())*-1)
+    console.log(this._posts);  
     return [...this._posts]
   }
   emitter = new Subject<Post[]>()
@@ -27,7 +29,7 @@ export class PostService {
 
   addPost(p:Post){
     this._posts.push(p)
-    this.emitter.next(this._posts)
+    this.emitter.next(this.posts)
   }
 
   samplePost():Post{
@@ -41,7 +43,8 @@ export class PostService {
         likedPosts: []
       },
       title: "amg",
-      text: "Il pollo è il miglior cibo senza ombra di dubbio"
+      text: "Il pollo è il miglior cibo senza ombra di dubbio",
+      date: new Date()
     }
   }
 }

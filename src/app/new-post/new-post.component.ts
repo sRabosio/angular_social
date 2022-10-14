@@ -35,8 +35,11 @@ export class NewPostComponent implements OnInit, DoCheck {
     const post:Post = {
       user: this.session.user,
       title: this.form.get('postTitle')!.value,
-      text: this.form.get('postContent')!.value
+      text: this.form.get('postContent')!.value,
+      date:new Date()
     }
+    console.log(post);
+    
     this.postService.addPost(post)
     this.form.reset()
   }
