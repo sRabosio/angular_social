@@ -32,15 +32,11 @@ body{
     /*border-right: 2px solid black;
     border-top: 2px solid black;*/
     border-radius: 0 1rem 0 0;
-    
+
 }
 
 .homepage__content{
     grid-column: 2;
-    overflow-y: scroll;  
+    overflow-y: scroll;
 }
 
-.homelink{
-    color:black;
-    text-decoration: none;
-}
