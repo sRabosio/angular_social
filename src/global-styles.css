@@ -3,7 +3,12 @@
     font-size: 9px;
 }
 
-input.ng-invalid.ng-touched{
+input.ng-invalid.ng-touched {
+    border-color: red;
+    border-radius: 3px;
+}
+
+textarea.ng-invalid.ng-touched{
     border-color: red;
     border-radius: 3px;
 }

@@ -23,6 +23,7 @@ export class PostComponent implements OnInit {
         email: "ciao",
         password: "ciao"
       },
+      title: "amg",
       text: "Il pollo è il miglior cibo senza ombra di dubbio"
     }
   }

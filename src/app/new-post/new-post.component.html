@@ -1,1 +1,18 @@
-<p>new-post works!</p>
+<div class="card">
+    <div class="card-body">
+        <h4>New post</h4>
+        <form class="form-group" [formGroup]="form" (ngSubmit)="onPost()">
+            <div class="inputbox">
+                <label for="title">Title</label>           
+                <input type="text" class="form-control" name="postTitle" formControlName="postTitle" #title>
+            </div>
+            <div class="inputbox">
+                <label for="content">Content</label>
+                <textarea rows="5" name="postContent" class="form-control" formControlName="postContent" #content></textarea>
+            </div>
+            <div class="container form-footer">
+                <button type="submit" class="btn btn-primary">Post</button>
+            </div>
+        </form>
+    </div>
+</div>
