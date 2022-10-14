@@ -37,5 +37,6 @@
     overflow-y: scroll;  
     gap: 4rem;
     margin: 0;  
-    min-height: fit-content;
+    min-height: max-content;
+    padding-bottom: 10rem;
 }

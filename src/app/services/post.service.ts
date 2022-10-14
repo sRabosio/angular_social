@@ -9,12 +9,12 @@ export class PostService {
 
   private _posts:Post[] = []
   get posts(){
-    return this._posts
+    return [...this._posts]
   }
   emitter = new Subject<Post[]>()
 
   constructor() {
-    this._posts = [
+      this._posts = [
       this.samplePost(),
       this.samplePost(),
       this.samplePost(),
