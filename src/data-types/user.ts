@@ -6,7 +6,7 @@ export type User = {
     email:string,
     image?:string,
     password:string,
-    followed?:User[],
-    likedPosts?:Post[],
-    likedComments?:Comment[]
+    following:string[],//nickname
+    likedPosts:string[],//id
+    likedComments:string[]//id
 }

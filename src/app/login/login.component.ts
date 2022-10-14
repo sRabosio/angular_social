@@ -40,10 +40,13 @@ export class LoginComponent implements OnInit, DoCheck {
 
   onRegistration(form: NgForm) {
     const users = this.userService.users
-    const userReg = {
+    const userReg:User = {
       nickname: this.formNickname,
       email: this.formEmail,
-      password: this.formPassword
+      password: this.formPassword,
+      following: [],
+      likedComments: [],
+      likedPosts: []
     }    
     
     if(users.filter(u=>u.nickname === userReg.nickname).length>0){
@@ -65,10 +68,13 @@ export class LoginComponent implements OnInit, DoCheck {
 
 
   onLogin(form:NgForm){
-    const userLog = {
+    const userLog:User = {
       nickname:"",
       email:this.formEmail,
-      password:this.formPassword
+      password:this.formPassword,
+      following: [],
+      likedComments: [],
+      likedPosts: []
     }
     const result = this.userService.validate(userLog)
     if(!result){

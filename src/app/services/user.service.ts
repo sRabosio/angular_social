@@ -23,6 +23,9 @@ export class UserService {
       nickname: "amogus",
       email: "amogus@gmail.com",
       password: "amogus",
+      following: ["ciao"],
+      likedComments: [],
+      likedPosts: []
     })
   }
 

@@ -35,7 +35,10 @@ export class PostService {
       user: {
         nickname: "ciao",
         email: "ciao",
-        password: "ciao"
+        password: "ciao",
+        following: [],
+        likedComments: [],
+        likedPosts: []
       },
       title: "amg",
       text: "Il pollo è il miglior cibo senza ombra di dubbio"

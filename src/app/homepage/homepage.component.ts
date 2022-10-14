@@ -28,13 +28,18 @@ export class HomepageComponent implements OnInit, OnDestroy{
       sessionUser = this.session.user
       if(sessionUser){
         this.user = sessionUser
+        this.posts = this.extractUserFeed(this.postService.posts)
         clearInterval(i)
       } 
     },1000)
   })
 
+  extractUserFeed(list:Post[]){
+    return list.filter(p=>this.user?.following.includes(p.user.nickname) || p.user === this.user)
+  }
+
   constructor(private session:SessionService, private postService:PostService) {
-    this.posts = postService.posts
+    
    }
 
   ngOnDestroy(): void {
@@ -42,8 +47,9 @@ export class HomepageComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void{
+    
     this.feedSub = this.postService.emitter.subscribe(next=>{
-      this.posts = next
+      this.posts = this.extractUserFeed(next)
     })
   }
 }
