@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { User } from 'src/data-types/user';
 import { FilterArrayPipe } from '../filter-array.pipe';
 
@@ -8,6 +9,8 @@ import { FilterArrayPipe } from '../filter-array.pipe';
 export class UserService {
 
   private _users:User[] = []
+
+  emitter = new Subject<User[]>()
 
   get users(){
     return [...this._users]
@@ -44,7 +47,25 @@ export class UserService {
   add(u:User){
     if(this.getUserByEmail(u.email) || this.getUserByName(u.nickname)) return false
     this._users.push(u)
+    this.emitter.next(this.users)
     return true
+  }
+
+  toggleFollow(nick:string, followed:string){
+    
+    const user = this.getUserByName(nick)
+    if(!user) return
+    
+    const l1 = user.following.length
+    const a = user.following.filter(s=>s!==followed)
+    if(a.length !== l1){
+      user.following = a
+      this.emitter.next(this.users)
+      return
+    }
+
+    user.following.push(followed)
+    this.emitter.next(this.users)    
   }
 
   findUsers(value: string){

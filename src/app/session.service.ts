@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { interval, Observable, Subject } from 'rxjs';
+import { interval, Observable, Subject, Subscription } from 'rxjs';
 import { observeNotification } from 'rxjs/internal/Notification';
 import { User } from 'src/data-types/user';
 import { UserService } from './services/user.service';
@@ -8,7 +8,6 @@ import { UserService } from './services/user.service';
   providedIn: 'root'
 })
 export class SessionService {
-
   private _user?:User
   
   get user(){
@@ -29,5 +28,9 @@ export class SessionService {
     this._user = undefined
   }
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService) {
+    userService.emitter.subscribe(next=>{
+      this.user = userService.getUserByName(this.user.nickname)
+    })
+   }
 }
