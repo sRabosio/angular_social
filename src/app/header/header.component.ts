@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   shortSearchResult:User[] = []
 
   constructor(private router:Router, private userService: UserService) {
-   }
+  }
   ngDoCheck(): void {
     this.shortSearchResult = this.userService.findUsers(this.searchValue)
   }
@@ -26,6 +26,10 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   onSearch(){
     this.router.navigateByUrl(`search/${this.searchValue}`)
+    this.clearSearch()
+  }
+
+  clearSearch(){
     this.searchValue = ""
   }
 

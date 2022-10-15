@@ -3,12 +3,13 @@
         <div class="postHeader">
             <div class="postHeader__user">
                 <a class="postHeader__user__name" [routerLink]="['user', post!.user]">
-                    {{post!.user}}
+                    {{post?.user}}
                 </a>
             </div>
+          <h4>{{post?.title}}</h4>
         </div>
         <p class="card-text">
-            {{post!.text}}
+            {{post?.text}}
         </p>
     </div>
 </div>
