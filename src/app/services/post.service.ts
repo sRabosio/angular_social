@@ -7,7 +7,10 @@ import { Post } from 'src/data-types/post';
 })
 export class PostService {
 
+  //NB: use add function to modify posts
   private _posts:Post[] = []
+  private idCounter = 0
+
   get posts(){
     this._posts.sort((p1, p2)=> (p1.date.getTime() - p2.date.getTime())*-1)
     return [...this._posts]
@@ -23,20 +26,17 @@ export class PostService {
   }
 
   constructor() {
-      this._posts = [
-      this.samplePost(),
-      this.samplePost(),
-      this.samplePost(),
-      this.samplePost(),
-      this.samplePost(),
-      this.samplePost(),
-      this.samplePost(),
-    ]
+      for(let i = 0; i < 10; i++)
+        this.addPost(this.samplePost())
+
    }
 
   addPost(p:Post){
+    p.id = this.idCounter++
     this._posts.push(p)
     this.emitter.next(this.posts)
+    console.log("new id ", this.idCounter );
+
   }
 
   samplePost():Post{
