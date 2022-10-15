@@ -18,8 +18,13 @@ export class SearchResultsComponent implements OnInit {
   constructor(private route:ActivatedRoute, private userService:UserService, private postService:PostService, private router:Router) {
     router.routeReuseStrategy.shouldReuseRoute = ()=>false
     const searchValue = this.route.snapshot.params["searchValue"]
+    //user search
     this.usersFound = this.userService.findUsers(searchValue)
+    //post search
     this.postsFound = this.postService.getPostByUser(searchValue)
+    this.postsFound = [...this.postsFound, ...this.postService.getPostByTitle(searchValue)]
+    //result sort by most recent
+    this.postsFound.sort((p1,p2)=>(p1.date.getTime() - p2.date.getTime())*-1)
    }
 
   ngOnInit(): void {

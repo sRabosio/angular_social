@@ -13,9 +13,13 @@ export class PostService {
     return [...this._posts]
   }
   emitter = new Subject<Post[]>()
-  
+
   getPostByUser(nickname:string){
     return this.posts.filter(p=>p.user === nickname)
+  }
+
+  getPostByTitle(title:string){
+    return this.posts.filter(p=>p.title.search(title)>=0)
   }
 
   constructor() {

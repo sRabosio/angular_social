@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   onSearch(){
     this.router.navigateByUrl(`search/${this.searchValue}`)
+    this.searchValue = ""
   }
 
 }
