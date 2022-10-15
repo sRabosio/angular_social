@@ -16,6 +16,7 @@ import { PopupComponent } from './popup/popup.component';
 import { FilterArrayPipe } from './filter-array.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HeaderComponent } from './header/header.component';
     LoginComponent,
     PopupComponent,
     FilterArrayPipe,
-    HeaderComponent
+    HeaderComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
