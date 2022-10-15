@@ -1,9 +1,12 @@
 <div class="container header">
   <h1><a [routerLink]="['']" class="homelink">TESTATA</a></h1>
   <div class="formcontainer container">
-    <form class="form-group searchbar">
-      <input type="text" name="">
+    <form class="form-group searchbar" (ngSubmit)="onSearch()">
+      <input type="text" name="searchValue" [(ngModel)]="searchValue">
       <button type="submit"><i class="bi bi-search"></i></button>
+      <div class="shortSearchResult">
+        <a *ngFor="let item of shortSearchResult" [routerLink]="['user/', item.nickname]" >{{item.nickname}}</a>
+      </div>
     </form>
   </div>
 </div>

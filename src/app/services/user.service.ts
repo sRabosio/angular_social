@@ -12,7 +12,7 @@ export class UserService {
   get users(){
     return [...this._users]
   }
-   
+
   public getUserByName(nickname:string){
     return this._users.filter(e => e.nickname === nickname)[0]
   }
@@ -48,10 +48,8 @@ export class UserService {
   }
 
   findUsers(value: string){
-    let result:User[] = []
-    result = [...result, ...this._users.filter(e => e.email.search(value))]
-    result = [...result, ...this._users.filter(e => e.nickname.search(value))]
-    return result
+    if(+value === 0) return []
+    return [...this._users.filter(e => e.nickname.search(value)>=0)]
   }
 
   //conferma che mail e password coincidano con un account presente nel db

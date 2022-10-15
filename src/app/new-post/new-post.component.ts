@@ -15,13 +15,13 @@ export class NewPostComponent implements OnInit, DoCheck {
   form:FormGroup
   protected postTitle:string = ""
 
-  constructor(private userService:UserService, private postService:PostService, private session:SessionService) { 
+  constructor(private userService:UserService, private postService:PostService, private session:SessionService) {
     this.form = new FormGroup({
       'postTitle': new FormControl('',[Validators.required, Validators.maxLength(50)]),
       'postContent': new FormControl('',[Validators.required, Validators.maxLength(300)])
     })
   }
-  ngDoCheck(): void {        
+  ngDoCheck(): void {
   }
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class NewPostComponent implements OnInit, DoCheck {
       text: this.form.get('postContent')!.value,
       date:new Date()
     }
-    
+
     this.postService.addPost(post)
     this.form.reset()
   }
