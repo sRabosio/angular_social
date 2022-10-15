@@ -5,7 +5,7 @@
       <input type="text" name="searchValue" [(ngModel)]="searchValue">
       <button type="submit"><i class="bi bi-search"></i></button>
       <div class="shortSearchResult">
-        <a *ngFor="let item of shortSearchResult" (click)="clearSearch()" [routerLink]="['user/', item.nickname]" >{{item.nickname}}</a>
+        <a *ngFor="let item of shortSearchResult" (click)="clearSearch()" [routerLink]="['user', item.nickname]" >{{item.nickname}}</a>
       </div>
     </form>
   </div>
