@@ -1,3 +1,7 @@
+body{
+  overflow-x: hidden;
+}
+
 .form-validation-message{
     color: red;
     font-size: 9px;
@@ -34,7 +38,7 @@ textarea.ng-invalid.ng-touched{
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    margin: 0;  
+    margin: 0;
     min-height: max-content;
-    padding-bottom: 10rem;
+    padding-bottom: 50%;
 }

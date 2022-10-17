@@ -26,8 +26,6 @@ export class PostService {
   }
 
   constructor() {
-      for(let i = 0; i < 10; i++)
-        this.addPost(this.samplePost())
 
    }
 
@@ -35,16 +33,7 @@ export class PostService {
     p.id = this.idCounter++
     this._posts.push(p)
     this.emitter.next(this.posts)
-    console.log("new id ", this.idCounter );
 
   }
 
-  samplePost():Post{
-    return {
-      user: "ciao",
-      title: "amg",
-      text: "Il pollo è il miglior cibo senza ombra di dubbio",
-      date: new Date()
-    }
-  }
 }

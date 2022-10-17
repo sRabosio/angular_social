@@ -25,22 +25,6 @@ export class UserService {
   }
 
   constructor() {
-    this._users.push({
-      nickname: "amogus",
-      email: "amogus@gmail.com",
-      password: "amogus",
-      following: ["ciao"],
-      likedComments: [],
-      likedPosts: []
-    },
-    {
-      nickname: "ciao",
-      email: "ciao",
-      password: "ciao",
-      following: [],
-      likedComments: [],
-      likedPosts: []
-    },)
   }
 
   //returns operation success (true/false)
@@ -52,10 +36,10 @@ export class UserService {
   }
 
   toggleFollow(nick:string, followed:string){
-    
+
     const user = this.getUserByName(nick)
     if(!user) return
-    
+
     const l1 = user.following.length
     const a = user.following.filter(s=>s!==followed)
     if(a.length !== l1){
@@ -65,7 +49,7 @@ export class UserService {
     }
 
     user.following.push(followed)
-    this.emitter.next(this.users)    
+    this.emitter.next(this.users)
   }
 
   findUsers(value: string){
