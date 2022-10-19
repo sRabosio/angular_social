@@ -14,16 +14,36 @@ export class LoginComponent implements OnInit, DoCheck {
   login:FormGroup
   registration:FormGroup
   isLogin = true
+
+  get emailInvalidMessage(){
+    const email = this.isLogin ? this.login.get('email') : this.registration.get('email')
+    if(!email) return null
+
+    if(email.getError('email')) return "email is invalid"
+    if(email.getError('emailUsed')) return "email already in use"
+    return null
+  }
+
+  get nameInvalidMessage(){
+    const name = this.isLogin ? this.login.get('nickname') : this.registration.get('nickname')
+    if(!name) return null
+
+    if(name.value!.length > 20) return "nickname must not exceed the lenght of 20 characters"
+    if(name.value!.length < 4) return "nickname must be atleast 4 characters long"
+    if(name.getError('nameUsed')) return "nickname is already in use"
+    return null
+  }
+
   get toggleLogin(){
     return this.isLogin = !this.isLogin
   }
 
   get formLogEmpty(){
-    return this.login.status === "INVALID"
+    return !this.login.valid
   }
 
   get formRegEmpty(){
-    return this.registration.status === "INVALID"
+    return !this.registration.valid
   }
 
   constructor(private userService:UserService, private session:SessionService) {
@@ -32,22 +52,22 @@ export class LoginComponent implements OnInit, DoCheck {
       'password': new FormControl("", [Validators.required])
     })
     this.registration = new FormGroup({
-      'nickname': new FormControl("",[Validators.required, Validators.maxLength(20), Validators.minLength(4)]),
-      'email': new FormControl("",[Validators.required, Validators.email]),
+      'nickname': new FormControl("",[Validators.required, Validators.maxLength(20), Validators.minLength(4),
+      this.isNameUsed.bind(this)]),
+      'email': new FormControl("",[Validators.required, Validators.email, this.isEmailUsed.bind(this)]),
       'password': new FormControl("",[Validators.required]),
       'passwordConfirmation': new FormControl("",[Validators.required]),
     })
-
-    this.formGroupLogs()
   }
 
-  private formGroupLogs(){
-    console.table({"login email": this.login.get('email'), "login password": this.login.get('password')} )
-    console.table({
-      "registration nickname": this.registration.get('nickname'),
-      "registration email": this.registration.get('email'),
-      "registration password": this.registration.get('password'),
-      "registration password confirmation": this.registration.get('passwordConfirmation')})
+  private isNameUsed(control:FormControl){
+    if(this.userService.users.filter(u=>u.nickname === control.value).length > 0) return {nameUsed:true}
+    return null
+  }
+
+  private isEmailUsed(control:FormControl){
+    if(this.userService.users.filter(u=>u.email === control.value).length > 0) return {emailUsed:true}
+    return null
   }
 
   ngDoCheck(): void {
@@ -85,8 +105,8 @@ export class LoginComponent implements OnInit, DoCheck {
     this.isLogin = !this.isLogin
   }
 
-
   onLogin(){
+
     const userLog:User = {
       nickname:"",
       email:this.login!.get('email')!.value,

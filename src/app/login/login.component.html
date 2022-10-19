@@ -7,7 +7,6 @@
         <div class="input-box">
           <label for="email">email</label>
           <input type="email" name="email" id="email" class="from-control" formControlName="email">
-
           <span class="form-validation-message" *ngIf="!login.get('email')!.valid && login.get('email')!.touched">devi inserire un'email valida</span>
         </div>
         <div class="input-box">
@@ -25,12 +24,12 @@
         <div class="input-box">
           <label for="nickname">nickname</label>
           <input type="formNickname" name="formNickname" id="formNickname" class="from-control" formControlName="nickname">
-          <!--span class="form-validation-message" *ngIf="!email.valid && email.touched">devi inserire un'email valida</span-->
+          <span class="form-validation-message" *ngIf="!registration!.get('nickname')!.valid && registration!.get('nickname')!.touched">{{nameInvalidMessage}}</span>
         </div>
         <div class="input-box">
           <label for="email">email</label>
           <input type="email" name="email" id="email" class="from-control" formControlName="email">
-          <span class="form-validation-message" *ngIf="!registration!.get('email')!.valid && registration.get('email')!.touched">devi inserire un'email valida</span>
+          <span class="form-validation-message" *ngIf="!registration!.get('email')!.valid && registration.get('email')!.touched">{{emailInvalidMessage}}</span>
         </div>
         <div class="input-box">
           <label for="password">password</label>
