@@ -11,44 +11,63 @@ import { SessionService } from '../session.service';
 })
 export class LoginComponent implements OnInit, DoCheck {
 
-  @ViewChild("loginForm") loginForm?:NgForm
-  @ViewChild("registrationForm") registrationForm?:NgForm
-  protected formEmail: string = ""
-  protected formPassword:string = ""
-  protected formPasswordConf:string = ""
-  protected formNickname:string = ""
-  registration = false
+  login:FormGroup
+  registration:FormGroup
+  isLogin = true
+  get toggleLogin(){
+    return this.isLogin = !this.isLogin
+  }
 
   get formLogEmpty(){
-    return this.loginForm?.status === "INVALID"
+    return this.login.status === "INVALID"
   }
 
   get formRegEmpty(){
-    return this.registrationForm?.status === "INVALID"
+    return this.registration.status === "INVALID"
   }
 
   constructor(private userService:UserService, private session:SessionService) {
+    this.login = new FormGroup({
+      'email': new FormControl("", [Validators.required, Validators.email]),
+      'password': new FormControl("", [Validators.required])
+    })
+    this.registration = new FormGroup({
+      'nickname': new FormControl("",[Validators.required, Validators.maxLength(20), Validators.minLength(4)]),
+      'email': new FormControl("",[Validators.required, Validators.email]),
+      'password': new FormControl("",[Validators.required]),
+      'passwordConfirmation': new FormControl("",[Validators.required]),
+    })
+
+    this.formGroupLogs()
   }
-  
+
+  private formGroupLogs(){
+    console.table({"login email": this.login.get('email'), "login password": this.login.get('password')} )
+    console.table({
+      "registration nickname": this.registration.get('nickname'),
+      "registration email": this.registration.get('email'),
+      "registration password": this.registration.get('password'),
+      "registration password confirmation": this.registration.get('passwordConfirmation')})
+  }
+
   ngDoCheck(): void {
-    
   }
 
   ngOnInit(): void {
-    
+
   }
 
-  onRegistration(form: NgForm) {
+  onRegistration() {
     const users = this.userService.users
     const userReg:User = {
-      nickname: this.formNickname,
-      email: this.formEmail,
-      password: this.formPassword,
+      nickname: this.registration!.get('nickname')!.value,
+      email: this.registration!.get('email')!.value,
+      password: this.registration!.get('password')!.value,
       following: [],
       likedComments: [],
       likedPosts: []
-    }    
-    
+    }
+
     if(users.filter(u=>u.nickname === userReg.nickname).length>0){
       alert("il nickname è già in uso")
       return
@@ -57,31 +76,33 @@ export class LoginComponent implements OnInit, DoCheck {
       alert("esiste già un account con questa email")
       return
     }
-    if(userReg.password !== this.formPasswordConf){
+    if(userReg.password !== this.registration!.get('passwordConfirmation')!.value){
       alert("le password devono coincidere")
       return
     }
 
     this.userService.add(userReg)
-    this.registration = !this.registration
+    this.isLogin = !this.isLogin
   }
 
 
-  onLogin(form:NgForm){
+  onLogin(){
     const userLog:User = {
       nickname:"",
-      email:this.formEmail,
-      password:this.formPassword,
+      email:this.login!.get('email')!.value,
+      password:this.login!.get('password')!.value,
       following: [],
       likedComments: [],
       likedPosts: []
     }
     const result = this.userService.validate(userLog)
+    console.log("logging with", userLog);
+
     if(!result){
       alert("email o password sbagliate")
       return
     }
-    
+
     this.session.user = result
   }
 

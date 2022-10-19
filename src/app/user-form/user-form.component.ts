@@ -10,13 +10,6 @@ import { RegistrationComponent } from '../registration/registration.component';
 export class UserFormComponent implements OnInit {
 
   registration = false
-  get formRegEmpty(){
-    return this.regComp.formRegEmpty
-  }
-
-  get formLogEmpty(){
-    return this.loginComp.formLogEmpty
-  }
 
   get toggleForm(){
     this.registration = !this.registration

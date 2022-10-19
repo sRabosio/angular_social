@@ -20,6 +20,7 @@ export class NewPostComponent implements OnInit, DoCheck {
       'postTitle': new FormControl('',[Validators.required, Validators.maxLength(50)]),
       'postContent': new FormControl('',[Validators.required, Validators.maxLength(300)])
     })
+
   }
   ngDoCheck(): void {
   }
