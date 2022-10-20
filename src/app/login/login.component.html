@@ -7,11 +7,12 @@
         <div class="input-box">
           <label for="email">email</label>
           <input type="email" name="email" id="email" class="from-control" formControlName="email">
-          <span class="form-validation-message" *ngIf="!login.get('email')!.valid && login.get('email')!.touched">devi inserire un'email valida</span>
+          <span class="form-validation-message" *ngIf="!login.get('email')!.valid && login.get('email')!.touched">{{emailLoginInvalidMessage}}</span>
         </div>
         <div class="input-box">
           <label for="password">password</label>
           <input type="password" name="password" id="password" formControlName="password" class="from-control">
+          <span class="form-validation-message" *ngIf="isLoginPasswordWrong">wrong password</span>
         </div>
         <div class="container buttons-container">
           <button type="submit" class="btn btn-primary" [disabled]="formLogEmpty">Login</button>

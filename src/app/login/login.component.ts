@@ -14,13 +14,27 @@ export class LoginComponent implements OnInit, DoCheck {
   login:FormGroup
   registration:FormGroup
   isLogin = true
+  isLoginPasswordWrong = false
 
   get emailInvalidMessage(){
-    const email = this.isLogin ? this.login.get('email') : this.registration.get('email')
+    const email = this.registration.get('email')
     if(!email) return null
 
-    if(email.getError('email')) return "email is invalid"
+    if(email.getError('email')) return "enter a valid email"
     if(email.getError('emailUsed')) return "email already in use"
+    return null
+  }
+
+  get emailLoginInvalidMessage(){
+    const email = this.login.get('email')
+    if(!email) return null
+
+    console.log(email.getError('userDoesntExists'));
+
+
+    if(email.getError('email')) return "enter a valid email"
+    if(email.getError('userDoesntExists')) return "accont doesn't exixst, try registering"
+
     return null
   }
 
@@ -56,7 +70,7 @@ export class LoginComponent implements OnInit, DoCheck {
 
   constructor(private userService:UserService, private session:SessionService) {
     this.login = new FormGroup({
-      'email': new FormControl("", [Validators.required, Validators.email]),
+      'email': new FormControl("", [Validators.required, Validators.email, this.doesUserExists.bind(this)]),
       'password': new FormControl("", [Validators.required])
     })
     this.registration = new FormGroup({
@@ -75,6 +89,11 @@ export class LoginComponent implements OnInit, DoCheck {
 
   private isEmailUsed(control:FormControl){
     if(this.userService.users.filter(u=>u.email === control.value).length > 0) return {emailUsed:true}
+    return null
+  }
+
+  private doesUserExists(control:FormControl){
+    if(this.userService.users.filter(u=>u.email  === control.value).length <= 0) return {userDoesntExists: true}
     return null
   }
 
@@ -120,10 +139,10 @@ export class LoginComponent implements OnInit, DoCheck {
     const result = this.userService.validate(userLog)
 
     if(!result){
-      alert("email o password sbagliate")
+      this.isLoginPasswordWrong = true
       return
     }
-
+    this.isLoginPasswordWrong = false
     this.session.user = result
   }
 
