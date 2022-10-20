@@ -38,6 +38,9 @@
         <div class="input-box">
           <label for="passwordConf">confirm password</label>
           <input type="password" name="passwordConf" formControlName="passwordConfirmation" id="passwordConf" class="from-control">
+          <span class="form-validation-message" *ngIf="!registration!.get('passwordConfirmation')!.valid && registration.get('passwordConfirmation')!.touched">
+            {{passwordConfInvalidMessage}}
+          </span>
         </div>
         <div class="container buttons-container">
           <button type="submit" class="btn btn-primary" [disabled]="formRegEmpty">Register</button>

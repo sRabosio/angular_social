@@ -34,6 +34,14 @@ export class LoginComponent implements OnInit, DoCheck {
     return null
   }
 
+  get passwordConfInvalidMessage(){
+    const passConf = this.isLogin ? this.login.get('passwordConfimation') : this.registration.get('passwordConfirmation')
+    if(!passConf) return null
+
+    if(passConf.getError('passwordsDontMatch')) return "passwords must match"
+    return null
+  }
+
   get toggleLogin(){
     return this.isLogin = !this.isLogin
   }
@@ -56,7 +64,7 @@ export class LoginComponent implements OnInit, DoCheck {
       this.isNameUsed.bind(this)]),
       'email': new FormControl("",[Validators.required, Validators.email, this.isEmailUsed.bind(this)]),
       'password': new FormControl("",[Validators.required]),
-      'passwordConfirmation': new FormControl("",[Validators.required]),
+      'passwordConfirmation': new FormControl("",[Validators.required, this.doPasswordsMatch.bind(this)])
     })
   }
 
@@ -68,6 +76,11 @@ export class LoginComponent implements OnInit, DoCheck {
   private isEmailUsed(control:FormControl){
     if(this.userService.users.filter(u=>u.email === control.value).length > 0) return {emailUsed:true}
     return null
+  }
+
+  private doPasswordsMatch(control:FormControl){
+    if(control?.value === this.registration?.get('password')?.value) return null
+    return {passwordsDontMatch: true}
   }
 
   ngDoCheck(): void {
@@ -116,7 +129,6 @@ export class LoginComponent implements OnInit, DoCheck {
       likedPosts: []
     }
     const result = this.userService.validate(userLog)
-    console.log("logging with", userLog);
 
     if(!result){
       alert("email o password sbagliate")
