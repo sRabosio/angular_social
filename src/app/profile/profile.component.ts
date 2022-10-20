@@ -44,9 +44,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit(): void {
-
     this.postsSub = this.postService.emitter.subscribe(next=>{
-      this.posts = next.filter(p=>p.user === this.user.nickname)
+      this.posts = PostService.sortByNewest(
+        next.filter(p=>p.user === this.user.nickname)
+      )
     })
     this.sessionUserSub = this.sessionService.emitter.subscribe(next=> this.sessionUser=next)
   }

@@ -12,10 +12,13 @@ export class PostService {
   private idCounter = 0
 
   get posts(){
-    this._posts.sort((p1, p2)=> (p1.date.getTime() - p2.date.getTime())*-1)
     return [...this._posts]
   }
   emitter = new Subject<Post[]>()
+
+  static sortByNewest(pp:Post[]){
+    return pp.sort((p1, p2)=> (p1.date.getTime() - p2.date.getTime())*-1)
+  }
 
   getPostByUser(nickname:string){
     return this.posts.filter(p=>p.user === nickname)

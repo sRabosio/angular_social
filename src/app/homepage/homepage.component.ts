@@ -4,6 +4,7 @@ import { Post } from 'src/data-types/post';
 import { User } from 'src/data-types/user';
 import { PostComponent } from '../post/post.component';
 import { PostService } from '../services/post.service';
+import { UserService } from '../services/user.service';
 import { SessionService } from '../session.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class HomepageComponent implements OnInit, OnDestroy{
   }
 
   constructor(private session:SessionService, private postService:PostService) {
-    
+
    }
 
   ngOnDestroy(): void {
@@ -37,7 +38,10 @@ export class HomepageComponent implements OnInit, OnDestroy{
   ngOnInit(): void{
     this.userSub = this.session.emitter.subscribe(next=>{
       this.user = next
-      this.posts = this.extractUserFeed(this.postService.posts)   
+      //extracts and sorts feed
+      this.posts = PostService.sortByNewest(
+        this.extractUserFeed(this.postService.posts)
+      )
     })
   }
 }
