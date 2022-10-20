@@ -23,17 +23,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
   sessionUserSub?:Subscription
 
   get followed(){
-    if(!this.sessionUser) return false    
+    if(!this.sessionUser) return false
     return this.sessionUser.following.filter(s=>s === this.user.nickname).length>0
   }
 
   constructor(private route:ActivatedRoute, private sessionService:SessionService, private userService:UserService, private postService:PostService, private router:Router) {
-    
+
+    this.sessionUser = sessionService.user
     this.user = userService.getUserByName(
       route.snapshot.params["nickname"]
     )
     if(!this.user) router.navigateByUrl("")
-    
+
     this.posts = postService.getPostByUser(this.user.nickname)
     router.routeReuseStrategy.shouldReuseRoute = ()=>false
   }
@@ -43,7 +44,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit(): void {
-    
+
     this.postsSub = this.postService.emitter.subscribe(next=>{
       this.posts = next.filter(p=>p.user === this.user.nickname)
     })

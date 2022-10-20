@@ -9,7 +9,7 @@ import { UserService } from './services/user.service';
 })
 export class SessionService {
   private _user?:User
-  
+
   get user(){
     return {...this._user!}
   }

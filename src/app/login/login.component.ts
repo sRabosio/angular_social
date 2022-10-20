@@ -78,6 +78,7 @@ export class LoginComponent implements OnInit, DoCheck {
     return null
   }
 
+  //confimation password only
   private doPasswordsMatch(control:FormControl){
     if(control?.value === this.registration?.get('password')?.value) return null
     return {passwordsDontMatch: true}
@@ -101,20 +102,8 @@ export class LoginComponent implements OnInit, DoCheck {
       likedPosts: []
     }
 
-    if(users.filter(u=>u.nickname === userReg.nickname).length>0){
-      alert("il nickname è già in uso")
-      return
-    }
-    if(users.filter(u=>u.email === userReg.email).length>0){
-      alert("esiste già un account con questa email")
-      return
-    }
-    if(userReg.password !== this.registration!.get('passwordConfirmation')!.value){
-      alert("le password devono coincidere")
-      return
-    }
-
     this.userService.add(userReg)
+    this.registration.reset()
     this.isLogin = !this.isLogin
   }
 
