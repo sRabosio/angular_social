@@ -35,21 +35,29 @@ export class UserService {
     return true
   }
 
-  toggleFollow(nick:string, followed:string){
+  toggleFollow(nick:string, followed:string):Error | null{
 
     const user = this.getUserByName(nick)
-    if(!user) return
+    const followedUser = this.getUserByName(followed);
+    if(!followedUser) return new Error("followed user doesn't exists")
+    if(!user) return new Error("user doesn't exists")
 
     const l1 = user.following.length
     const a = user.following.filter(s=>s!==followed)
+
+    //unfollow
     if(a.length !== l1){
       user.following = a
+      followedUser.followers = followedUser.followers.filter(s=>s!==user.nickname)
       this.emitter.next(this.users)
-      return
+      return null
     }
 
+    //follow
     user.following.push(followed)
+    followedUser.followers.push(user.nickname)
     this.emitter.next(this.users)
+    return null
   }
 
   findUsers(value: string){

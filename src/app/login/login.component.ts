@@ -117,6 +117,7 @@ export class LoginComponent implements OnInit, DoCheck {
       email: this.registration!.get('email')!.value,
       password: this.registration!.get('password')!.value,
       following: [],
+      followers: [],
       likedComments: [],
       likedPosts: []
     }
@@ -133,6 +134,7 @@ export class LoginComponent implements OnInit, DoCheck {
       email:this.login!.get('email')!.value,
       password:this.login!.get('password')!.value,
       following: [],
+      followers: [],
       likedComments: [],
       likedPosts: []
     }

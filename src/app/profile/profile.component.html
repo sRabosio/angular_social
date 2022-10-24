@@ -3,6 +3,10 @@
     <div class="profile-info">
       <button class="btn btn-outline-dark" *ngIf="user.nickname !== sessionUser?.nickname && !followed" (click)="onFollow()">follow</button>
       <button class="btn btn-primary" *ngIf="user.nickname !== sessionUser?.nickname && followed" (click)="onFollow()">followed</button>
+      <div class="profile-info__smInfo text-sm">
+        <a>{{user.followers.length}} followers</a>
+        <a>{{user.following.length}} following</a>
+      </div>
     </div>
 </div>
 <div class="postsList">

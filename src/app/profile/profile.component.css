@@ -17,13 +17,16 @@
 .profile-info{
   grid-column: 3;
   display:flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   max-height: 100%;
   justify-content: center;
 }
 
-.profile-info *{
-  max-width: fit-content;
-  font-size: 11px;
+.profile-info__smInfo{
+  max-width: max-content;
+  display: flex;
+  flex-direction: column;
+  min-width: fit-content;
+  gap: 0;
 }

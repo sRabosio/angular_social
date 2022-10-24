@@ -1,5 +1,3 @@
-import { Comment } from "./comments";
-import { Post } from "./post";
 
 export type User = {
     nickname:string,
@@ -7,6 +5,7 @@ export type User = {
     image?:string,
     password:string,
     following:string[],//nickname
+    followers:string[],//nickname
     likedPosts:string[],//id
     likedComments:string[]//id
 }
