@@ -1,8 +1,5 @@
 <div class="container results">
-  <div class="container results-users">
-    <!--TODO: SEARCH, COMMENTS, LIKES, ETC-->
-    <app-user-card *ngFor="let u of usersFound" [user]="u"></app-user-card>
-  </div>
+  <app-user-list [userList]="usersFound"></app-user-list>
   <div class="container postsList">
       <app-post *ngFor="let p of postsFound" [post]="p"></app-post>
   </div>

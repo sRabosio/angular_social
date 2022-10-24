@@ -1,11 +1,4 @@
-.results-users{
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid lightgray;
-  gap: 2rem;
-  min-height: fit-content;
-  padding-bottom: 5rem;
-}
+
 
 .postsList{
   margin-top: 5rem;

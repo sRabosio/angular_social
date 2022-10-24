@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UserCardComponent } from './user-card/user-card.component';
     FilterArrayPipe,
     HeaderComponent,
     SearchResultsComponent,
-    UserCardComponent
+    UserCardComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
